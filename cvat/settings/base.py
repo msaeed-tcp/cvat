@@ -148,7 +148,13 @@ INSTALLED_APPS = [
     "cvat.apps.consensus",
     "cvat.apps.access_tokens",
     "cvat.apps.growth",
+    # Real-time class-distribution analytics (evaluation task)
+    "channels",
+    "cvat.apps.test",
 ]
+
+# Channels serves the WebSocket half of cvat.asgi:application.
+ASGI_APPLICATION = "cvat.asgi.application"
 
 AUTH_USER_MODEL = "iam.User"
 
@@ -360,6 +366,28 @@ REDIS_INMEM_SETTINGS = {
         # https://github.com/rq/rq/pull/2120
         "socket_timeout": None,
     },
+}
+
+# The channel layer is the fan-out bus between the processes that write
+# annotations and the processes that hold WebSocket connections. It reuses the
+# in-memory Redis that CVAT already runs, on a logical database of its own:
+# 0 belongs to RQ and 1 to the Django cache.
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [
+                {
+                    "host": redis_inmem_host,
+                    "port": int(redis_inmem_port),
+                    "password": redis_inmem_password or None,
+                    "db": int(os.getenv("CVAT_TEST_ANALYTICS_REDIS_DB", 2)),
+                }
+            ],
+            "capacity": 1000,
+            "expiry": 10,
+        },
+    }
 }
 
 RQ_QUEUES = {

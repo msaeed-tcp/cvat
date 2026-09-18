@@ -6,6 +6,12 @@ av==16.0.1
 
 azure-storage-blob==12.30.0
 boto3~=1.37
+
+# Real-time class-distribution analytics (evaluation task)
+# channels 4.3+ requires asgiref>=3.9; CVAT currently resolves asgiref to 3.8.1,
+# so the 4.2 line is the newest that installs without moving that pin.
+channels==4.2.2
+channels-redis==4.2.1
 clickhouse-connect~=1.3
 datumaro @ https://github.com/cvat-ai/datumaro/archive/6ade96fa82043fc5bccd59a27218892899fe10ce.zip
 dj-pagination==2.5.0

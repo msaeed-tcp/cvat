@@ -115,6 +115,12 @@ export default function TaskActionsItems(menuItemsData: MenuItemsData, taskMenuP
         disabled: isDisabled('quality_control') || isQualityControlDisabled,
     }, 70]);
 
+    menuItems.push([{
+        key: 'class_distribution',
+        label: withCount('Class distribution', 'class_distribution', `/tasks/${taskId}/class-distribution`),
+        disabled: isDisabled('class_distribution'),
+    }, 72]);
+
     if (isConsensusEnabled) {
         menuItems.push([{
             key: 'consensus_management',

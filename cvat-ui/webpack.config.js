@@ -86,9 +86,12 @@ module.exports = (env, argv = {}) => {
             proxy: [{
                 context: (param) =>
                     param.match(
-                        /\/api\/.*|analytics\/.*|static\/.*|admin(?:\/(.*))?.*|profiler(?:\/(.*))?.*|documentation\/.*|django-rq(?:\/(.*))?/gm,
+                        /\/api\/.*|\/ws\/test\/.*|analytics\/.*|static\/.*|admin(?:\/(.*))?.*|profiler(?:\/(.*))?.*|documentation\/.*|django-rq(?:\/(.*))?/gm,
                     ),
                 target: env && env.API_URL,
+                // Lets the class-distribution WebSocket reach the backend
+                // through the dev server instead of failing the handshake.
+                ws: true,
                 secure: false,
                 changeOrigin: true,
                 onProxyReq: (proxyReq) => {

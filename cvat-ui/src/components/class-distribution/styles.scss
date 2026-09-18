@@ -1,0 +1,67 @@
+// Copyright (C) 2026 Muhammad Saeed
+//
+// SPDX-License-Identifier: MIT
+
+@import '../../base.scss';
+
+.cvat-class-distribution-page {
+    padding: $grid-unit-size * 2 $grid-unit-size * 4;
+    height: 100%;
+    overflow-y: auto;
+
+    > div:first-child {
+        margin-bottom: $grid-unit-size;
+    }
+}
+
+.cvat-class-distribution-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $grid-unit-size;
+    flex-wrap: wrap;
+
+    h4 {
+        margin-bottom: 0;
+    }
+}
+
+.cvat-class-distribution-summary {
+    margin: $grid-unit-size * 2 0;
+
+    .ant-statistic-title {
+        color: $text-color-secondary;
+    }
+}
+
+.cvat-class-distribution-body {
+    background: $background-color-1;
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    padding: $grid-unit-size * 2;
+}
+
+.cvat-class-distribution-chart {
+    width: 100%;
+}
+
+.cvat-class-distribution-swatch-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: $grid-unit-size;
+}
+
+.cvat-class-distribution-swatch {
+    display: inline-block;
+    width: $grid-unit-size;
+    height: $grid-unit-size;
+    border-radius: 2px;
+}
+
+.cvat-class-distribution-status {
+    display: inline-flex;
+    align-items: center;
+    gap: $grid-unit-size;
+    color: $text-color-secondary;
+    font-size: 12px;
+}
